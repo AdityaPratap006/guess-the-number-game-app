@@ -31,13 +31,34 @@ export default function App() {
     setRoute(CurrentRoute.GAME_OVER);
   }
 
+  const restartGameHandler = () => {
+    setRounds(0);
+    setRoute(CurrentRoute.START_GAME);
+    setUserNumber(undefined);
+  }
+
   let currentScreen;
   if (route === CurrentRoute.START_GAME) {
-    currentScreen = <StartGameScreen onStartGame={startGameHandler}/>;
+    currentScreen = (
+      <StartGameScreen
+        onStartGame={startGameHandler}
+      />
+    );
   } else if (route === CurrentRoute.GAME_PLAY && userNumber) {
-    currentScreen = <GamePlayScreen userChoice={userNumber} onGameOver={gameOverHandler}/>;
-  } else if (route === CurrentRoute.GAME_OVER) {
-    currentScreen = <GameOverScreen/>;
+    currentScreen = (
+      <GamePlayScreen
+        userChoice={userNumber}
+        onGameOver={gameOverHandler}
+      />
+    );
+  } else if (route === CurrentRoute.GAME_OVER && userNumber) {
+    currentScreen = (
+      <GameOverScreen
+        userChoice={userNumber}
+        totalRounds={rounds}
+        onGameRestart={restartGameHandler}
+      />
+    );
   }
 
   return (
