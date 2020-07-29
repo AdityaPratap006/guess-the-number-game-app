@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 // Components
@@ -10,6 +10,7 @@ import { lightThemeColors } from '../themes/colors';
 
 interface GamePlayScreenProps {
     userChoice: number;
+    onGameOver: (rounds: number) => void;
 };
 
 const generateRandomBetween = (min: number, max: number, exclude: number): number => {
@@ -32,9 +33,17 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
     const [currentGuess, setCurrentGuess] = useState<number>(
         generateRandomBetween(1, 100, props.userChoice)
     );
+    const [rounds, setRounds] = useState<number>(0);
 
     const currentLow = useRef<number>(1);
     const currentHigh = useRef<number>(100);
+    
+    const { userChoice, onGameOver } = props;
+    useEffect(function checkIfGoalReached() {
+        if (currentGuess === userChoice) {
+            onGameOver(rounds);
+        }
+    }, [currentGuess, rounds, userChoice, onGameOver]);
 
     const validateMove = (direction: Direction) => {
         if (direction === Direction.LOWER && currentGuess < props.userChoice) {
@@ -70,6 +79,7 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
 
         const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
         setCurrentGuess(nextNumber);
+        setRounds(prevRounds => prevRounds + 1);
     }
 
     return (
