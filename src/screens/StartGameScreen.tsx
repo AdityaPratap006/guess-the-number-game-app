@@ -16,6 +16,7 @@ import Card from '../components/Card';
 // Colors
 import { lightThemeColors } from '../themes/colors';
 import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
 
 const StartGameScreen = () => {
     const [enteredValue, setEnteredValue] = useState<string>('');
@@ -66,8 +67,22 @@ const StartGameScreen = () => {
     let confirmedOutput;
     if (confirmed && selectedNumber !== undefined) {
         confirmedOutput = (
-            <Card>
-                <Text>Chosen Number: {selectedNumber <= 9 ? '0' + selectedNumber : selectedNumber}</Text>
+            <Card style={styles.summary}>
+                <Text>You Selected</Text>
+                <NumberContainer
+                    number={selectedNumber <= 9 ? '0' + selectedNumber : selectedNumber}
+                    containerStyle={{
+                        marginVertical: 24,
+                    }}
+                    numberStyle={{
+                        fontSize: 45,
+                    }}
+                />
+                <Button
+                    title="START GAME"
+                    onPress={() => {}}
+                    color={lightThemeColors.primary}
+                />
             </Card>
         );
     }
@@ -145,5 +160,11 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '40%',
-    }
+    },
+    summary: {
+        marginTop: 20,
+        alignItems: 'center',
+        width: 200,
+        maxWidth: '70%',
+    },
 });
