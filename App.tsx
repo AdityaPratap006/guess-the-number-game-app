@@ -24,18 +24,18 @@ export default function App() {
     setRoute(CurrentRoute.GAME_PLAY);
   }
 
-  let screen;
+  let currentScreen;
   if (route === CurrentRoute.START_GAME) {
-    screen = <StartGameScreen onStartGame={startGameHandler}/>;
+    currentScreen = <StartGameScreen onStartGame={startGameHandler}/>;
   } else if (route === CurrentRoute.GAME_PLAY && userNumber) {
-    screen = <GamePlayScreen selectedNumber={userNumber}/>;
+    currentScreen = <GamePlayScreen userChoice={userNumber}/>;
   }
 
   return (
     <View style={styles.screen}>
       <StatusBar />
       <Header title="Guess the Number" />
-      {screen}
+      {currentScreen}
     </View>
   );
 }

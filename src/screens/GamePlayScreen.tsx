@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 // Components
 import NumberContainer from '../components/NumberContainer';
@@ -9,7 +9,7 @@ import Card from '../components/Card';
 import { lightThemeColors } from '../themes/colors';
 
 interface GamePlayScreenProps {
-    selectedNumber: number;
+    userChoice: number;
 };
 
 const generateRandomBetween = (min: number, max: number, exclude: number): number => {
@@ -23,10 +23,54 @@ const generateRandomBetween = (min: number, max: number, exclude: number): numbe
     }
 }
 
+enum Direction {
+    LOWER,
+    HIGHER,
+};
+
 const GamePlayScreen = (props: GamePlayScreenProps) => {
     const [currentGuess, setCurrentGuess] = useState<number>(
-        generateRandomBetween(1, 100, props.selectedNumber)
+        generateRandomBetween(1, 100, props.userChoice)
     );
+
+    const currentLow = useRef<number>(1);
+    const currentHigh = useRef<number>(100);
+
+    const validateMove = (direction: Direction) => {
+        if (direction === Direction.LOWER && currentGuess < props.userChoice) {
+            return false;
+        }
+
+        if (direction === Direction.HIGHER && currentGuess > props.userChoice) {
+            return false;
+        }
+
+        return true;
+    }
+
+    const nextGuessHandler = (direction: Direction) => {
+        const isValidMove = validateMove(direction);
+
+        if (!isValidMove) {
+            Alert.alert(
+                `Don't Lie!! 😏`,
+                `You know this is wrong...😝`,
+                [
+                    { text: 'Sorry!', style: 'cancel' },
+                ]
+            );
+            return;
+        }
+
+        if (direction === Direction.LOWER) {
+            currentHigh.current = currentGuess;
+        } else if (direction === Direction.HIGHER) {
+            currentLow.current = currentGuess;
+        }
+
+        const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
+        setCurrentGuess(nextNumber);
+    }
 
     return (
         <View style={styles.screen}>
@@ -39,12 +83,16 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
             <Card style={styles.buttonContainer}>
                 <Button
                     title="LOWER"
-                    onPress={() => { }}
+                    onPress={() => { 
+                        nextGuessHandler(Direction.LOWER);
+                     }}
                     color={lightThemeColors.primary}
                 />
                 <Button
-                    title="UPPER"
-                    onPress={() => { }}
+                    title="HIGHER"
+                    onPress={() => {
+                        nextGuessHandler(Direction.HIGHER);
+                     }}
                     color={lightThemeColors.primary}
                 />
             </Card>
