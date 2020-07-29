@@ -18,7 +18,11 @@ import { lightThemeColors } from '../themes/colors';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 
-const StartGameScreen = () => {
+interface StartGameScreenProps {
+    onStartGame: (num: number) => void;
+};
+
+const StartGameScreen = (props: StartGameScreenProps) => {
     const [enteredValue, setEnteredValue] = useState<string>('');
     const [confirmed, setConfirmed] = useState<boolean>(false);
     const [selectedNumber, setSelectedNumber] = useState<number | undefined>();
@@ -64,6 +68,12 @@ const StartGameScreen = () => {
         closeKeyboard();
     }
 
+    const startGameHandler = () => {
+        if (confirmed && selectedNumber) {
+            props.onStartGame(selectedNumber);
+        }
+    }
+
     let confirmedOutput;
     if (confirmed && selectedNumber !== undefined) {
         confirmedOutput = (
@@ -80,7 +90,7 @@ const StartGameScreen = () => {
                 />
                 <Button
                     title="START GAME"
-                    onPress={() => {}}
+                    onPress={startGameHandler}
                     color={lightThemeColors.primary}
                 />
             </Card>
