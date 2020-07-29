@@ -4,6 +4,9 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 // Components
 import Card from '../components/Card';
 
+// Colors
+import { lightThemeColors } from '../themes/colors';
+
 const StartGameScreen = () => {
     return (
         <View style={styles.screen}>
@@ -16,12 +19,14 @@ const StartGameScreen = () => {
                         <Button
                             title="RESET"
                             onPress={() => { }}
+                            color={lightThemeColors.accent}
                         />
                     </View>
                     <View style={styles.button}>
                         <Button
                             title="CONFIRM"
                             onPress={() => { }}
+                            color={lightThemeColors.primary}
                         />
                     </View>
                 </View>

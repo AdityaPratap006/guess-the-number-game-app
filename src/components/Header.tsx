@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+// Colors
+import { lightThemeColors } from '../themes/colors';
+
 interface HeaderProps {
     title: string;
 };
@@ -20,13 +23,13 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 90,
         paddingTop: 36,
-        backgroundColor: '#9c27b0',
+        backgroundColor: lightThemeColors.primary,
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 10,
     },
     headerTitle: {
-        color: 'white',
+        color: lightThemeColors.appTitle,
         fontSize: 18,
     },
 });
