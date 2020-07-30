@@ -8,6 +8,7 @@ import {
     Keyboard,
     GestureResponderEvent,
     Alert,
+    Dimensions,
 } from 'react-native';
 
 // Components
@@ -154,8 +155,7 @@ const styles = StyleSheet.create({
         color: lightThemeColors.text,
     },
     inputContainer: {
-        width: 300,
-        maxWidth: '80%',
+        width: Dimensions.get("window").width * 0.85,
         alignItems: 'center',
     },
     input: {

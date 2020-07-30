@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 // Theme
 import { defaultStyles } from '../themes';
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     numberContainer: {
-        marginVertical: 20,
+        marginVertical: Dimensions.get("window").height > 600 ? 10 : 5,
     },
     number: {
         fontSize: 45,
@@ -132,13 +132,12 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 10,
-        width: 300,
-        maxWidth: '90%',
+        marginTop: Dimensions.get("window").height > 600 ? 20 : 10,
+        width: Dimensions.get("window").width * 0.85,
     },
     listContainer: {
-        marginTop: 20,
-        width: '80%',
+        marginTop: Dimensions.get("window").height > 600 ? 20 : 10,
+        width: Dimensions.get("window").width * 0.85,
         height: 300,
     }
 });

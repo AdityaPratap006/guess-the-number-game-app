@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, ImageStyle } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, ImageStyle, Dimensions, ScrollView } from 'react-native';
 
 // Theme
 import { lightThemeColors, defaultStyles } from '../themes';
@@ -15,33 +15,35 @@ interface GameOverScreenProps {
 
 const GameOverScreen = (props: GameOverScreenProps) => {
     return (
-        <View style={styles.screen}>
-            <Text style={[defaultStyles.titleText, styles.title]}>Game Over!</Text>
-            <View style={styles.imageContainer}>
-                <Image
-                    fadeDuration={1000}
-                    source={require('../../assets/success.png')}
-                    // source={{
-                    //     uri: 'https://www.mountainiq.com/wp-content/uploads/2019/01/matterhorn.jpg?x45723',
-                    //     width: 400,
-                    //     height: 400,
-                    // }}
-                    style={styles.image}
-                    resizeMode="cover"
-                />
-            </View>
-            <Text style={[defaultStyles.bodyText, styles.text]}>
-                Your phone needed
+        <ScrollView>
+            <View style={styles.screen}>
+                <Text style={[defaultStyles.titleText, styles.title]}>Game Over!</Text>
+                <View style={styles.imageContainer}>
+                    <Image
+                        fadeDuration={1000}
+                        source={require('../../assets/success.png')}
+                        // source={{
+                        //     uri: 'https://www.mountainiq.com/wp-content/uploads/2019/01/matterhorn.jpg?x45723',
+                        //     width: 400,
+                        //     height: 400,
+                        // }}
+                        style={styles.image}
+                        resizeMode="cover"
+                    />
+                </View>
+                <Text style={[defaultStyles.bodyText, styles.text]}>
+                    Your phone needed
                 <Text style={styles.highlight}>{" " + props.totalRounds + " "}</Text>
                 rounds to guess the number
                 <Text style={styles.highlight}>{" " + props.userChoice}</Text>
-            </Text>
-            <CustomButton
-                onPress={props.onGameRestart}
-            >
-                PLAY AGAIN
-            </CustomButton>
-        </View>
+                </Text>
+                <CustomButton
+                    onPress={props.onGameRestart}
+                >
+                    PLAY AGAIN
+                </CustomButton>
+            </View>
+        </ScrollView>
     );
 };
 
@@ -58,13 +60,13 @@ const styles = StyleSheet.create({
         color: lightThemeColors.text,
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 1000,
+        width: Dimensions.get("window").width * 0.75,
+        height: Dimensions.get("window").width * 0.75,
+        borderRadius: Dimensions.get("window").width * 0.75 * 0.5,
         borderWidth: 3,
         borderColor: lightThemeColors.accent,
         overflow: 'hidden',
-        margin: 20,
+        margin: Dimensions.get("window").height * 0.03,
     },
     image: {
         width: '100%',
@@ -74,11 +76,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: lightThemeColors.text,
         textAlign: 'center',
-        margin: 20,
+        margin: Dimensions.get("window").height * 0.02,
     },
     highlight: {
         color: lightThemeColors.primary,
-        fontSize: 24,
+        fontSize: Dimensions.get("window").height > 400 ? 20 : 16,
         fontFamily: 'open-sans-bold',
     },
 });
