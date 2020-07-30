@@ -91,9 +91,10 @@ const StartGameScreen = (props: StartGameScreenProps) => {
                     }}
                 />
                 <CustomButton
-                    title="START GAME"
                     onPress={startGameHandler}
-                />
+                >
+                    START GAME
+                </CustomButton>
             </Card>
         );
     }

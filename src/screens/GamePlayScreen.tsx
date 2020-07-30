@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-
+import { StyleSheet, Text, View, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 // Theme
-import { lightThemeColors } from '../themes';
+// import { lightThemeColors } from '../themes';
 
 // Components
 import NumberContainer from '../components/NumberContainer';
@@ -39,7 +39,7 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
 
     const currentLow = useRef<number>(1);
     const currentHigh = useRef<number>(100);
-    
+
     const { userChoice, onGameOver } = props;
     useEffect(function checkIfGoalReached() {
         if (currentGuess === userChoice) {
@@ -94,17 +94,19 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
             />
             <Card style={styles.buttonContainer}>
                 <CustomButton
-                    title="LOWER"
-                    onPress={() => { 
+                    onPress={() => {
                         nextGuessHandler(Direction.LOWER);
-                     }}
-                />
+                    }}
+                >
+                    <Ionicons name="md-remove" size={24} color="white" />
+                </CustomButton>
                 <CustomButton
-                    title="HIGHER"
                     onPress={() => {
                         nextGuessHandler(Direction.HIGHER);
-                     }}
-                />
+                    }}
+                >
+                    <Ionicons name="md-add" size={24} color="white" />
+                </CustomButton>
             </Card>
         </View>
     );

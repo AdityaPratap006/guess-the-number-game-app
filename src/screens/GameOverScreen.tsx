@@ -37,9 +37,10 @@ const GameOverScreen = (props: GameOverScreenProps) => {
                 <Text style={styles.highlight}>{" " + props.userChoice}</Text>
             </Text>
             <CustomButton
-                title="PLAY AGAIN"
                 onPress={props.onGameRestart}
-            />
+            >
+                PLAY AGAIN
+            </CustomButton>
         </View>
     );
 };

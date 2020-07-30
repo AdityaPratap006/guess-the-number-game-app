@@ -5,15 +5,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { lightThemeColors } from '../themes';
 
 interface CustomButtonProps {
-    title: string;
+    children: React.ReactNode; 
     onPress: () => void;
 };
 
-const CustomButton = ({ title, onPress }: CustomButtonProps) => {
+const CustomButton = ({ children, onPress }: CustomButtonProps) => {
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.6}>
             <View style={styles.button}>
-                <Text style={styles.buttonText}>{title}</Text>
+                <Text style={styles.buttonText}>{children}</Text>
             </View>
         </TouchableOpacity>
     );
