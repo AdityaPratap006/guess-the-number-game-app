@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
 
 // Components
 import Header from './src/components/Header';
@@ -9,6 +11,13 @@ import Header from './src/components/Header';
 import StartGameScreen from './src/screens/StartGameScreen';
 import GamePlayScreen from './src/screens/GamePlayScreen';
 import GameOverScreen from './src/screens/GameOverScreen';
+
+const fetchFonts = async () => {
+  return Font.loadAsync({
+    'open-sans': require('./assets/fonts/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/fonts/OpenSans-Bold.ttf'),
+  });
+}
 
 enum CurrentRoute {
   START_GAME,
@@ -20,6 +29,17 @@ export default function App() {
   const [route, setRoute] = useState<CurrentRoute>(CurrentRoute.START_GAME);
   const [userNumber, setUserNumber] = useState<number>();
   const [rounds, setRounds] = useState<number>(0);
+  const [isLoaded, setIsLoadeded] = useState<boolean>(false);
+
+  if (!isLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setIsLoadeded(true)}
+        onError={(error) => console.log(error)}
+      />
+    );
+  }
 
   const startGameHandler = (selectedNumber: number) => {
     setUserNumber(selectedNumber);

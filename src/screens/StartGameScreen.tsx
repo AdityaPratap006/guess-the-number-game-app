@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginVertical: 10,
         color: lightThemeColors.text,
+        fontFamily: 'open-sans-bold',
     },
     inputContainer: {
         width: 300,
