@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 // Theme
-// import { lightThemeColors } from '../themes';
+import { defaultStyles } from '../themes';
 
 // Components
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
 import CustomButton from '../components/CustomButton';
-
+import RoundList from '../components/RoundList';
 
 interface GamePlayScreenProps {
     userChoice: number;
@@ -32,10 +32,10 @@ enum Direction {
 };
 
 const GamePlayScreen = (props: GamePlayScreenProps) => {
-    const [currentGuess, setCurrentGuess] = useState<number>(
-        generateRandomBetween(1, 100, props.userChoice)
-    );
-    const [rounds, setRounds] = useState<number>(0);
+    const initialGuess = generateRandomBetween(1, 100, props.userChoice);
+
+    const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
+    const [rounds, setRounds] = useState<number[]>([initialGuess]);
 
     const currentLow = useRef<number>(1);
     const currentHigh = useRef<number>(100);
@@ -43,7 +43,7 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
     const { userChoice, onGameOver } = props;
     useEffect(function checkIfGoalReached() {
         if (currentGuess === userChoice) {
-            onGameOver(rounds);
+            onGameOver(rounds.length);
         }
     }, [currentGuess, rounds, userChoice, onGameOver]);
 
@@ -81,12 +81,12 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
 
         const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
         setCurrentGuess(nextNumber);
-        setRounds(prevRounds => prevRounds + 1);
+        setRounds(prevRounds => [nextNumber, ...prevRounds]);
     }
 
     return (
         <View style={styles.screen}>
-            <Text>Opponent's Guess</Text>
+            <Text style={defaultStyles.titleText}>Opponent's Guess</Text>
             <NumberContainer
                 number={currentGuess}
                 numberStyle={styles.number}
@@ -108,6 +108,9 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
                     <Ionicons name="md-add" size={24} color="white" />
                 </CustomButton>
             </Card>
+            <View style={styles.listContainer}>
+                <RoundList list={rounds} />
+            </View>
         </View>
     );
 };
@@ -132,5 +135,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 300,
         maxWidth: '90%',
+    },
+    listContainer: {
+        marginTop: 20,
+        width: '100%',
+        height: 300,
     }
 });
