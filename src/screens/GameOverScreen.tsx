@@ -4,6 +4,9 @@ import { StyleSheet, Text, View, Button, Image, ImageStyle } from 'react-native'
 // Theme
 import { lightThemeColors, defaultStyles } from '../themes';
 
+// Components
+import CustomButton from '../components/CustomButton';
+
 interface GameOverScreenProps {
     userChoice: number;
     totalRounds: number;
@@ -33,10 +36,9 @@ const GameOverScreen = (props: GameOverScreenProps) => {
                 rounds to guess the number
                 <Text style={styles.highlight}>{" " + props.userChoice}</Text>
             </Text>
-            <Button
+            <CustomButton
                 title="PLAY AGAIN"
                 onPress={props.onGameRestart}
-                color={lightThemeColors.primary}
             />
         </View>
     );

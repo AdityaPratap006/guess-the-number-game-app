@@ -14,6 +14,7 @@ import {
 import Card from '../components/Card';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
+import CustomButton from '../components/CustomButton';
 
 // Theme
 import { lightThemeColors, defaultStyles } from '../themes';
@@ -89,10 +90,9 @@ const StartGameScreen = (props: StartGameScreenProps) => {
                         fontSize: 45,
                     }}
                 />
-                <Button
+                <CustomButton
                     title="START GAME"
                     onPress={startGameHandler}
-                    color={lightThemeColors.primary}
                 />
             </Card>
         );
@@ -175,7 +175,5 @@ const styles = StyleSheet.create({
     summary: {
         marginTop: 20,
         alignItems: 'center',
-        width: 200,
-        maxWidth: '70%',
     },
 });
