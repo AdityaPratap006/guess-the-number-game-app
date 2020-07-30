@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         marginTop: 20,
-        width: '100%',
+        width: '80%',
         height: 300,
     }
 });
