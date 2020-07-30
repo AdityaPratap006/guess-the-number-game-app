@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
         color: lightThemeColors.text,
     },
     imageContainer: {
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
         borderRadius: 1000,
         borderWidth: 3,
         borderColor: lightThemeColors.accent,
