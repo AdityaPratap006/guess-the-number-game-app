@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
+// Theme
+import { lightThemeColors } from '../themes';
+
 // Components
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+import CustomButton from '../components/CustomButton';
 
-// Colors
-import { lightThemeColors } from '../themes/colors';
 
 interface GamePlayScreenProps {
     userChoice: number;
@@ -91,19 +93,17 @@ const GamePlayScreen = (props: GamePlayScreenProps) => {
                 containerStyle={styles.numberContainer}
             />
             <Card style={styles.buttonContainer}>
-                <Button
+                <CustomButton
                     title="LOWER"
                     onPress={() => { 
                         nextGuessHandler(Direction.LOWER);
                      }}
-                    color={lightThemeColors.primary}
                 />
-                <Button
+                <CustomButton
                     title="HIGHER"
                     onPress={() => {
                         nextGuessHandler(Direction.HIGHER);
                      }}
-                    color={lightThemeColors.primary}
                 />
             </Card>
         </View>
@@ -126,9 +126,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         marginTop: 10,
         width: 300,
-        maxWidth: '80%',
+        maxWidth: '90%',
     }
 });
