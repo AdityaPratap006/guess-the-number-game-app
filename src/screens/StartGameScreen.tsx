@@ -12,11 +12,12 @@ import {
 
 // Components
 import Card from '../components/Card';
-
-// Colors
-import { lightThemeColors } from '../themes/colors';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
+
+// Theme
+import { lightThemeColors, defaultStyles } from '../themes';
+
 
 interface StartGameScreenProps {
     onStartGame: (num: number) => void;
@@ -100,9 +101,9 @@ const StartGameScreen = (props: StartGameScreenProps) => {
     return (
         <TouchableWithoutFeedback onPress={closeKeyboardOnTouchHandler}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start a New Game!</Text>
+                <Text style={[defaultStyles.titleText, styles.title]}>Start a New Game!</Text>
                 <Card style={styles.inputContainer}>
-                    <Text style={styles.inputTitle}>Select a Number</Text>
+                    <Text style={defaultStyles.bodyText}>Select a Number</Text>
                     <Input
                         style={styles.input}
                         blurOnSubmit
@@ -150,17 +151,11 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginVertical: 10,
         color: lightThemeColors.text,
-        fontFamily: 'open-sans-bold',
     },
     inputContainer: {
         width: 300,
         maxWidth: '80%',
         alignItems: 'center',
-    },
-    inputTitle: {
-        fontSize: 16,
-        fontFamily: 'open-sans',
-        color: lightThemeColors.text,
     },
     input: {
         width: 80,

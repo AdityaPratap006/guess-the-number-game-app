@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 // Colors
-import { lightThemeColors } from '../themes/colors';
+import { lightThemeColors, defaultStyles } from '../themes';
 
 interface HeaderProps {
     title: string;
@@ -11,7 +11,7 @@ interface HeaderProps {
 const Header = ({ title }: HeaderProps) => {
     return (
         <View style={styles.header}>
-            <Text style={styles.headerTitle}>{title}</Text>
+            <Text style={[defaultStyles.titleText, styles.headerTitle]}>{title}</Text>
         </View>
     );
 };
@@ -30,7 +30,5 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         color: lightThemeColors.appTitle,
-        fontSize: 18,
-        fontFamily: 'open-sans-bold',
     },
 });
