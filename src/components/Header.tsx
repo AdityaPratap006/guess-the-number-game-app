@@ -31,5 +31,6 @@ const styles = StyleSheet.create({
     headerTitle: {
         color: lightThemeColors.appTitle,
         fontSize: 18,
+        fontFamily: 'open-sans-bold',
     },
 });
