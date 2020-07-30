@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     highlight: {
         color: lightThemeColors.primary,
-        fontSize: 20,
+        fontSize: 24,
         fontFamily: 'open-sans-bold',
     },
 });
